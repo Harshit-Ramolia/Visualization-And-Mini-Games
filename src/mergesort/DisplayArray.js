@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DisplayArray({ arr }) {
+export default function DisplayArray({ arr, isColor }) {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -19,14 +19,9 @@ export default function DisplayArray({ arr }) {
         return (
           <Paper
             className={classes.box}
-            // style={{
-            //   background:
-            //     color === idx
-            //       ? didWin && isEnded
-            //         ? "lightGreen"
-            //         : "antiquewhite"
-            //       : "",
-            // }}
+            style={{
+              background: isColor[idx] === 1 ? "lightgreen" : "",
+            }}
           >
             {item}
           </Paper>

@@ -131,7 +131,7 @@ export default function Home() {
               <Link to="mergesort">
                 <CardActionArea>
                   <img
-                    src="binarysearch.png"
+                    src="mergesort.png"
                     alt="Merge Sort"
                     style={{ width: "100%" }}
                   />
