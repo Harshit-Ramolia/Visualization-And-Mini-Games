@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { CircularProgress } from "@material-ui/core";
+import React, { Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import Game2048 from "./2048";
+import BinarySearch from "./binarySearch";
+import Home from "./home";
+import MergeSort from "./mergesort";
+import Sudoku from "./sudoku";
+import TowerOfHanoi from "./towerOfHanoi";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <React.Fragment>
+      <Router>
+        <Suspense
+          fallback={
+            <CircularProgress
+              color="secondary"
+              style={{ position: "absolute", top: "50%", left: "50%" }}
+            />
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/sudoku">
+              <Sudoku />
+            </Route>
+            <Route path="/game2048">
+              <Game2048 />
+            </Route>
+            <Route path="/towerofhanoi">
+              <TowerOfHanoi />
+            </Route>
+            <Route path="/binarySearch">
+              <BinarySearch />
+            </Route>
+            <Route path="/mergesort">
+              <MergeSort />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
+      </Router>
+    </React.Fragment>
   );
 }
 
