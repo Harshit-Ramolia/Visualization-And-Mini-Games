@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Visualization-And-Mini-Games/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/Visualization-And-Mini-Games/static/js/main.0ebb7a3d.chunk.js",
+    "main.js.map": "/Visualization-And-Mini-Games/static/js/main.0ebb7a3d.chunk.js.map",
+    "runtime-main.js": "/Visualization-And-Mini-Games/static/js/runtime-main.23eb471e.js",
+    "runtime-main.js.map": "/Visualization-And-Mini-Games/static/js/runtime-main.23eb471e.js.map",
+    "static/js/2.f8094590.chunk.js": "/Visualization-And-Mini-Games/static/js/2.f8094590.chunk.js",
+    "static/js/2.f8094590.chunk.js.map": "/Visualization-And-Mini-Games/static/js/2.f8094590.chunk.js.map",
+    "index.html": "/Visualization-And-Mini-Games/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/Visualization-And-Mini-Games/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.f8094590.chunk.js.LICENSE.txt": "/Visualization-And-Mini-Games/static/js/2.f8094590.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.23eb471e.js",
+    "static/js/2.f8094590.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.0ebb7a3d.chunk.js"
+  ]
+}
