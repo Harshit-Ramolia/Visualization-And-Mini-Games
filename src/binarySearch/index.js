@@ -13,6 +13,7 @@ export default function BinarySearch() {
   const [linearSearch, setLinearSearch] = useState([]);
   const [colorBinary, setColorBinary] = useState(null);
   const [colorLinear, setColorLinear] = useState(null);
+  const [inProgress, setInProgress] = useState(false);
   const [isBinaryEnded, setIsBinaryEnded] = useState(false);
   const [isLinearEnded, setIsLinearEnded] = useState(false);
   const [didWin, setDidWin] = useState(false);
@@ -40,6 +41,7 @@ export default function BinarySearch() {
       setColorLinear,
       setIsBinaryEnded,
       setIsLinearEnded,
+      setInProgress
     });
   };
   return (
@@ -64,12 +66,21 @@ export default function BinarySearch() {
             didWin={didWin}
             isEnded={isLinearEnded}
           />
+          <Typography>
+            {" "}
+            {isBinaryEnded || isLinearEnded
+              ? didWin
+                ? "Found The Number"
+                : "Number is not present in Array"
+              : ""}{" "}
+          </Typography>
           <Box p={2} />
           <Button
             onClick={() => setRegenerate((prev) => !prev)}
             variant="outlined"
             color="secondary"
             style={{ margin: "10px" }}
+            disabled={inProgress}
           >
             Regenerate
           </Button>
@@ -78,9 +89,11 @@ export default function BinarySearch() {
             color="primary"
             style={{ margin: "10px" }}
             onClick={handleVisualize}
+            disabled={inProgress}
           >
             Visualize
           </Button>
+
           <Box />
           <Link to="/">
             <Button color="primary" style={{ margin: "10px" }}>

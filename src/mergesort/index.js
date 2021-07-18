@@ -10,15 +10,13 @@ export default function MergeSort() {
   const [regenerate, setRegenerate] = useState(false);
   const [array, setArray] = useState([]);
   const [isColor, setIsColor] = useState([]);
-  const [isEnded, setIsEnded] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
   useEffect(() => {
     generateArray(setArray);
   }, [regenerate]);
   const handleVisualize = () => {
-    // console.log(mergeSort(array));
     const processes = mergeSort([...array]);
-    visualize({ processes, setArray, setIsColor, setIsEnded });
-    // console.log(array);
+    visualize({ processes, setArray, setIsColor, setInProgress });
   };
   return (
     <React.Fragment>
@@ -27,18 +25,13 @@ export default function MergeSort() {
           <Typography variant="h4">Merge Sort</Typography>
           <Box p={2} />
           <DisplayArray arr={array} isColor={isColor} />
-          {/* <DisplayArray
-            arr={linearSearch}
-            color={colorLinear}
-            didWin={didWin}
-            isEnded={isLinearEnded}
-          /> */}
           <Box p={2} />
           <Button
             onClick={() => setRegenerate((prev) => !prev)}
             variant="outlined"
             color="secondary"
             style={{ margin: "10px" }}
+            disabled={inProgress}
           >
             Regenerate
           </Button>
@@ -47,6 +40,7 @@ export default function MergeSort() {
             color="primary"
             style={{ margin: "10px" }}
             onClick={handleVisualize}
+            disabled={inProgress}
           >
             Visualize
           </Button>

@@ -2,33 +2,47 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
   LinearProgress,
-  TextField,
   Typography,
+  Select,
+  InputLabel,
+  MenuItem,
+  makeStyles,
 } from "@material-ui/core";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import solveTower from "./functions/solveTower";
+import visualize from "./functions/visualize";
 import TowerBoard from "./TowerBoard";
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
+
 export default function TowerOfHanoi() {
-  const [sudokuValue, setSudokuValue] = useState(
-    new Array(9).fill(0).map(() => new Array(9).fill(0))
-  );
-
-  const [regenerate, setRegenerate] = useState(false);
+  const classes = useStyles();
+  const [diskState, setDiskState] = useState([[1, 2, 3], [], []]);
   const [inProgress, setInProgress] = useState(false);
-  const [progressValue, setProgressValue] = useState(0);
+  const [noOfDisk, setNoOfDisk] = React.useState(3);
 
-  useEffect(() => {
-    fetch("https://sugoku.herokuapp.com/board?difficulty=easy")
-      .then((response) => response.json())
-      .then((data) => {
-        setSudokuValue(data.board);
-      });
-  }, [regenerate]);
+  const handleChange = (event) => {
+    setNoOfDisk(event.target.value);
+    setDiskState([
+      [...Array.from({ length: event.target.value }, (_, i) => i + 1)],
+      [],
+      [],
+    ]);
+  };
 
-  const handleVisualize = () => {};
+  const handleVisualize = () => {
+    let processes = solveTower(noOfDisk);
+    visualize({ processes, setInProgress, setDiskState });
+  };
 
   return (
     <React.Fragment>
@@ -36,44 +50,33 @@ export default function TowerOfHanoi() {
         <Container maxWidth="sm">
           <Typography variant="h4">Tower Of Hanoi</Typography>
           <Box p={2} />
-          {/* <Formik
-            initialValues={{ numberOfDisks: '' }}
-            validate={(values) => {
-              const errors = {};
-                console.log(Number(values.numberOfDisks))
-            //   if (!Number(values.numberOfDisks)) {
-            //     errors.numberOfDisks = "Only Number";
-            //   }
-              return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              setSubmitting(false);
-            }}
-          >
-            {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  id="outlined-basic"
-                  label="Number Of Disks"
-                  variant="outlined"
-                  value={values.numberOfDisks}
-                  onChange={handleChange}
-                  helperText={errors.numberOfDisks ? "Incorrect entry." : ""}
-                  error={errors.numberOfDisks}
-                />
-                <Button type="submit" disabled={isSubmitting}>
-                  Submit
-                </Button>
-              </form>
-            )}
-          </Formik> */}
-
-          {progressValue > 0 && (
-            <LinearProgress variant="determinate" value={progressValue} />
-          )}
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">No Of Disk</InputLabel>
+            <Select
+              disabled={inProgress}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={noOfDisk}
+              onChange={handleChange}
+            >
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+            </Select>
+          </FormControl>
           <Box p={2} />
-          <TowerBoard />
-          <Box />
+          <TowerBoard diskState={diskState} noOfDisk={noOfDisk} />
+          <Box p={2} />
+          <Button
+            onClick={handleVisualize}
+            variant="outlined"
+            color="primary"
+            style={{ margin: "10px" }}
+            disabled={inProgress}
+          >
+            Visualize
+          </Button>
+          <Box p={2} />
           <Link to="/">
             <Button color="primary" style={{ margin: "10px" }}>
               {`<= Home`}

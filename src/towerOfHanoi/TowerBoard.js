@@ -29,15 +29,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TowerBoard({ init }) {
+export default function TowerBoard({ noOfDisk, diskState }) {
   const classes = useStyles();
   return (
     <div>
       <Grid container>
-        {[0, 1, 2].map((outerX) => (
+        {diskState.map((rod) => (
           <Grid item xs={4} className={classes.box}>
             <div className={classes.rod} />
-            <div className={classes.disk} />
+            {rod.map((disk, idx) => {
+              return (
+                <div
+                  className={classes.disk}
+                  style={{
+                    width: `${80 + (disk - noOfDisk) * 10}%`,
+                    bottom: (rod.length - idx - 1) * 20,
+                  }}
+                />
+              );
+            })}
           </Grid>
         ))}
       </Grid>

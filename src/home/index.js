@@ -85,8 +85,8 @@ export default function Home() {
               <Link to="/towerofhanoi">
                 <CardActionArea>
                   <img
-                    src="binarysearch.png"
-                    alt="Binary Search"
+                    src="tower.png"
+                    alt="Tower Of Hanoi"
                     style={{ width: "100%" }}
                   />
                   <CardContent>
@@ -108,8 +108,8 @@ export default function Home() {
               <Link to="game2048">
                 <CardActionArea>
                   <img
-                    src="binarysearch.png"
-                    alt="Binary Search"
+                    src="2048.png"
+                    alt="2048"
                     style={{ width: "100%" }}
                   />
                   <CardContent>

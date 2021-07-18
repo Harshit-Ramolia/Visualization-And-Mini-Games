@@ -5,7 +5,9 @@ async function visualize({
   setColorLinear,
   setIsBinaryEnded,
   setIsLinearEnded,
+  setInProgress,
 }) {
+  setInProgress(true);
   setIsBinaryEnded(false);
   setIsLinearEnded(false);
   const maxSteps =
@@ -14,17 +16,13 @@ async function visualize({
       progressValueLinearSearch.length
     ) - 1;
   for (let i = 0; i < maxSteps + 1; i++) {
-    console.log(
-      progressValueBinarySearch.length,
-      progressValueLinearSearch.length
-    );
     if (i > progressValueBinarySearch.length - 1) {
-      console.log("AsDASd");
+
       setIsBinaryEnded(true);
     } else {
       setColorBinary(progressValueBinarySearch[i]);
     }
-    if (i > progressValueLinearSearch.length-1) {
+    if (i > progressValueLinearSearch.length - 1) {
       setIsLinearEnded(true);
     } else {
       setColorLinear(progressValueLinearSearch[i]);
@@ -33,6 +31,7 @@ async function visualize({
   }
   setIsBinaryEnded(true);
   setIsLinearEnded(true);
+  setInProgress(false);
 }
 
 export default visualize;

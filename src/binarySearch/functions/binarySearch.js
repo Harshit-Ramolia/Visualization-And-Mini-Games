@@ -2,7 +2,6 @@ function binarySearch(arr, number, setDidWin) {
   let low = 0,
     high = arr.length - 1;
   let temp = [];
-  console.log("A", arr, number);
   while (low <= high) {
     const mid = Math.floor((low + high) / 2);
     temp.push(mid);
